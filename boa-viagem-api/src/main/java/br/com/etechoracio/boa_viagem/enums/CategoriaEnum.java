@@ -6,4 +6,5 @@ public enum CategoriaEnum {
 	 TRANSPORTE,
 	 HOSPEDAGEM,
 	 OUTROS;
+	
 	}
