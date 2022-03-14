@@ -1,5 +1,7 @@
 package br.com.etechoracio.boa_viagem.entity;
 
+import java.time.LocalDate;
+
 import lombok.Getter;
 import lombok.Setter;
 
