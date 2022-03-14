@@ -16,4 +16,6 @@ public class Gasto {
 
  private Double valor;
  private Viagem viagem;
+ 
+ 
 }
