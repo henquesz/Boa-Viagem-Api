@@ -18,7 +18,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="TBL_GASTO")
-
 public class Gasto {
 	
  @Id
