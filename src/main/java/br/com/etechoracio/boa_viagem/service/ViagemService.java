@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.etechoracio.boa_viagem.entity.Gasto;
 import br.com.etechoracio.boa_viagem.entity.Viagem;
+import br.com.etechoracio.boa_viagem.repository.GastoRepository;
 import br.com.etechoracio.boa_viagem.repository.ViagemRepository;
 
 
@@ -16,10 +18,29 @@ public class ViagemService {
 	
 	@Autowired
 	private ViagemRepository viagemRepo;
+	
+	@Autowired
+	private GastoRepository gastoRepo;
 	                                                                                                                                                                                                                               
 
-	public List<Viagem> listarTodos(){
+	public boolean excluir(Long id) {
 		
+		boolean existe = viagemRepo.existsById(id);
+		if(!existe) {
+			return existe;
+		}
+		
+		List<Gasto> gastos = gastoRepo.findByViagemId(id);
+		
+		if(!gastos.isEmpty()) {
+			gastoRepo.deleteAll(gastos);
+		}
+		
+		viagemRepo.deleteById(id);
+		return existe;
+	}
+	
+	public List<Viagem> listarTodos(){
 		
 		return viagemRepo.findAll();
 	}
