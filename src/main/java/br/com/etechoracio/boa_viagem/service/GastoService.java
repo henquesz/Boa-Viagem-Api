@@ -64,9 +64,17 @@ public class GastoService {
 	
 	
 	public Optional<Gasto> atualizar(Long id, Gasto gasto) {
+		Optional<Viagem> viagem = viagemRepo.findById(gasto.getViagem().getId());
+		if(viagem.get().getId() != gasto.getViagem().getId()) {
+			throw new RuntimeException("Viagem Inserida não corresponde com a Viagem do gasto");
+		} 
 		
 		boolean existe = repository.existsById(id);
 		if (!existe) {return Optional.empty();}
+		
+		if(gasto.getData().isBefore(viagem.get().getChegada())) {
+			throw new RuntimeException("Não foi possivel atualizar o gasto");
+		}
 		
 		return Optional.of(repository.save(gasto));
 	}
